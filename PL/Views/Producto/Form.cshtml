@@ -1,0 +1,78 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.js" type="text/javascript"></script>
+<h2>Form</h2>
+<div class="row">
+    <div class="container">
+        <div class="col-md-12">
+            <h2>Producto</h2>
+            <h5>Ingrese los datos del producto:</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @*Crea un salto de linea*@
+            <hr />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6" style="display: none;">
+                        @Html.LabelFor(model => model.IdProducto)
+                        @Html.TextBoxFor(model => model.IdProducto, new { @class = " hidden form-control", @id = "txtIdUsuario" })
+                        @Html.ValidationMessageFor(model => model.IdProducto)
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Nombre)
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                        @Html.ValidationMessageFor(model => model.Nombre)
+
+                    </div>
+                </div>
+
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Precio)
+                        @Html.TextBoxFor(model => model.Precio, new { @class = "form-control", @id = "txtPrecioUnitario" })
+                        @Html.ValidationMessageFor(model => model.Precio)
+
+                    </div>
+                </div>
+
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.fabricante.IdFabricante)
+                        @Html.TextBoxFor(model => model.Precio, new { @class = "form-control", @id = "txtPrecioUnitario" })
+                        @*@Html.tex(model => model.fabricante.IdFabricante, new SelectList(Model.fabricante.Fabricantes, "IdProveedor", "Nombre"), "Selecciona un Proveedor correspondiente", new { @class = "form-control" })*@
+                        @Html.ValidationMessageFor(model => model.fabricante.IdFabricante)
+
+                    </div>
+                </div>
+
+
+                <div class="col">
+                    <div class="col-md-3">
+                        <input type="submit" value="Guardar" class="btn btn-success" />
+                        @Html.ActionLink("Regresar", "GetAll", "Producto", htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
